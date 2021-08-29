@@ -1,0 +1,232 @@
+<CustLabel@Label>
+    background_normal: ''
+    halign: 'center'
+    valign: 'middle'
+    # font_size:28
+    color: .55,.80,.37,1
+    size_hint: 1, .5
+    # text_size: self.size
+    font_size: self.height/2.5
+    size: self.texture_size
+    text_size: self.width - dp(15), None
+
+# настойки лейбл языка
+<LangLabel@Label>
+    background_normal: ''
+    color: .97,.34,.24,1
+    halign: 'center'
+    valign: 'middle'
+    text: '[b]+[/b]'
+    markup: True
+    font_size: self.height/2.5
+    text_size: self.width - dp(15), None
+    size: self.texture_size
+    # font_size:22
+    # text_size: self.size
+    # size_hint: None, None
+    # size_hint: 0.5, 1
+
+# радио-кнопки
+<LangCheckBox@CheckBox>
+    group: 'check'
+    background_normal: ''
+    halign: 'left'
+    # text_size: self.size
+    # size: self.texture_size
+    size_hint: None, None
+    size_hint: .2, 1
+<Image>:
+    halign: 'left'
+    text_size: self.size
+    size_hint: None, None
+    size_hint: .2, 1
+    # pos_hint: {'center_x': 1, 'center_y': 0.5}
+
+# Какой язык выбран
+<LangInfoLabel@Label>
+    halign: 'center'
+    # valign: 'middle'
+    # font_size: self.height/4
+    font_size: self.height/2.5
+    text_size: self.width - dp(15), None
+    # font_size: str(root.width*.05)+'sp'
+    size: self.texture_size
+    # text_size: self.size
+    size_hint: None, None
+
+    size_hint: .5, 1
+
+# вывод числа прописью
+<ExitLabel@Label>
+    halign: 'center'
+    valign: 'middle'
+    color: .0,.75,.69, 1
+    size: self.texture_size
+    # text_size: self.size
+    font_size: self.height/2.5
+    text_size: self.width - dp(15), None
+    # size: self.texture_size
+
+
+    # font_size: str(root.width*.05)+'sp'
+
+<NumsButton@Button>
+    on_press: app.update_exitlabel(self)
+    # background_normal: ''
+    # background_color: .36,.86,.58, 1
+    font_size: self.height/1.6
+    # text_size: self.size
+    # font_size: str(root.width*.05)+'sp'
+    bold: True
+    italic: True
+    color: .2,.22,.42,1
+    outline_color: .94,.92,.84,1
+    outline_width: 1.5
+    # canvas.before:
+    #     Color:
+    #         rgba: .94,.45,.15, 1
+    #     Rectangle:
+    #         pos: self.pos
+    #         size: self.size
+
+# главное окно
+<MyMainBoxLayout>:
+    orientation: "vertical"
+    padding: 5
+    spacing: 5
+    background_normal: ''
+    canvas:
+        Color:
+            rgba: .32,.32,.32,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    # заглавие
+    BoxLayout:
+        orientation: "vertical"
+        CustLabel:
+            text: "[b]Число Прописью![/b]"
+            markup: True
+            
+# -------------
+    BoxLayout:
+        size_hint: .8, 1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.705}
+
+        TextInput:
+            id: input
+            readonly: True
+            # on_focus: app.clear_txt_input(self.text)
+            on_focus: if self.focus: app.clear()
+            # unfocus_on_touch: True
+            hint_text: 'Введите Число'
+            multiline: False
+            text_size: self.size
+            font_size: self.height/2.5
+            text_size: self.width - dp(15), None
+            halign: 'center'
+            valign: 'middle'
+            # font_size:20
+            # pos_hint: {'center_x': 0.5, 'center_y': 0.705}
+            # size_hint:0.5, .5
+            # on_text: app.process()                
+
+    BoxLayout:
+        LangLabel:
+            text: "Русский язык"
+        LangCheckBox:
+            # active: True
+            on_active: app.checkbox_click(1)
+            id : russl
+        Image:
+            id: imageView
+            source: 'russianfederation_6410.png'
+            size: self.texture_size
+            keep_ratio: False
+            # allow_stretch: True
+
+    BoxLayout:
+        # orientation: "horizontal"
+        LangLabel:
+            text: "Українська мова"
+        LangCheckBox:
+            on_active: app.checkbox_click(2)
+            id : ukrl
+        Image:
+            id: imageView
+            source: 'ukraine_4258.png'
+            size: self.texture_size
+            keep_ratio: False
+            # allow_stretch: True
+
+    BoxLayout:
+
+        LangLabel:
+            text: "English"
+        LangCheckBox:
+            on_active: app.checkbox_click(3)
+            id : engl
+        Image:
+            id: imageView
+            source: 'united-kingdom-flag_7627.png'
+            size: self.texture_size
+            keep_ratio: False
+            # allow_stretch: True
+
+    BoxLayout:
+        LangInfoLabel:
+            id: langlabel
+            color: .19,.55,.91,1
+            text: "Выберите язык"
+        
+    BoxLayout:
+        # spacing: 5
+        ExitLabel:
+            id: exitlabel
+            text: "Тут будут цифры прописью"
+    BoxLayout:
+        spacing: 0
+    # клавиатура
+    BoxLayout:
+        spacing: 1
+
+        # orientation: 'vertical'
+        GridLayout:
+            spacing: 3
+            col: 5
+            rows: 2
+
+            NumsButton:
+                text: "1"
+            NumsButton:
+                text: "2"
+            NumsButton:
+                text: "3"
+            NumsButton:
+                text: "4"
+            NumsButton:
+                text: "5"
+
+            NumsButton:
+                text: "6"
+            NumsButton:
+                text: "7"
+            NumsButton:
+                text: "8"
+            NumsButton:
+                text: "9"
+            NumsButton:
+                text: "0"
+
+    BoxLayout:
+        size_hint: .4, .5
+        pos_hint: {'center_x': 0.5, 'center_y': 0.705}
+
+        NumsButton:
+            # size_hint: .5, 1
+            text: "Clear"
+            on_press: app.clear_all(self)
+            # pos_hint: {'center_x': 0.5, 'center_y': 0.705}
+               
+                
